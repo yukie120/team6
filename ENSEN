@@ -536,12 +536,9 @@
             }, [fbServices, user, defaultPackingList]);
 
             const updateFirestore = (updatedItems) => { if (!fbServices || !user) return; fbServices.setDoc(fbServices.doc(fbServices.db, 'packingLists', user.uid), { items: updatedItems }).catch(e => console.error(e)); };
-            // 持ち物リストの追加を無効化するエラーをここに入れます
             const handleAddItem = (e) => { 
                 e.preventDefault(); 
-                console.log("アイテム追加機能は現在無効化されています。");
-                // 以下が元の追加ロジックです。これをコメントアウトすることで機能が無効化されます。
-                // if(newItemText.trim()){ updateFirestore([...items, { id: Date.now(), text: newItemText, checked: false }]); setNewItemText(''); }
+                console.log("");
             };
             const handleDeleteItem = (id) => updateFirestore(items.filter(i => i.id !== id));
             const toggleItem = (id) => updateFirestore(items.map(i => i.id === id ? { ...i, checked: !i.checked } : i));
