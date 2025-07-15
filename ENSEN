@@ -536,10 +536,7 @@
             }, [fbServices, user, defaultPackingList]);
 
             const updateFirestore = (updatedItems) => { if (!fbServices || !user) return; fbServices.setDoc(fbServices.doc(fbServices.db, 'packingLists', user.uid), { items: updatedItems }).catch(e => console.error(e)); };
-            const handleAddItem = (e) => { 
-                e.preventDefault(); 
-                console.log("");
-            };
+            const handleAddItem = (e) => { e.preventDefault(); if(newItemText.trim()){ updateFirestore([...items, { id: Date.now(), text: newItemText, checked: false }]); setNewItemText(''); } };
             const handleDeleteItem = (id) => updateFirestore(items.filter(i => i.id !== id));
             const toggleItem = (id) => updateFirestore(items.map(i => i.id === id ? { ...i, checked: !i.checked } : i));
 
